@@ -1,0 +1,46 @@
+# Ignore PowerShell module files
+*.psd1
+*.psm1
+
+# Ignore compiled binary files
+*.dll
+*.exe
+
+# Ignore PowerShell data files
+*.ps1xml
+*.pssc
+
+# Ignore user-specific files
+*.ps1.user
+*.ps1proj.user
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Ignore package management files
+*.nupkg
+*.nuspec
+
+# Ignore build output
+bin/
+obj/
+
+# Ignore VSCode settings
+.vscode/
+
+# Ignore PowerShell test artifacts
+TestResults/
+
+# Ignore dependency folders
+node_modules/
+packages/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore build files
+build/
