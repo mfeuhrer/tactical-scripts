@@ -2,16 +2,16 @@
 # Send a $true if software is expected to be installed, $false if not.
 # I use {{client.enable_omd}}
 $enable_omd = $args[0]
-if($null -eq $enable_omd) {
-    Write-Host "[Info] No check_mk installation status provided. Script will exit."
+if($false -eq $enable_omd) {
+    Write-Host "[Info] Check_MK is not configured for this environment."
     exit 0
 }
 # Send the uri as the second argument, do not include http(s)://
 # I use a client variable in tactical for this: {{client.omd_host}}
 $omd_host = $args[1]
 if($null -eq $omd_host) {
-    Write-Host "[Info] No check_mk host provided. Script will not continue."
-    exit 3
+    Write-Host "[Fail] No check_mk host provided."
+    exit 1
 }
 
 # Path to cmk
