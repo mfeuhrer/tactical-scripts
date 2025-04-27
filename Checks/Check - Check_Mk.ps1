@@ -6,7 +6,8 @@ $software = "Check MK Agent 2.2"
 $enable_omd = $args[0]
 if($false -eq $enable_omd) {
     Write-Host "[Info] Check_MK is not configured for this environment."
-    exit 0
+    $host.SetShouldExit(3)
+    exit
 }
 
 # Import Snippet

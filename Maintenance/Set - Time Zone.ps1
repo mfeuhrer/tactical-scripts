@@ -1,9 +1,8 @@
-# define desired time zone
 if ($args) {
     $testZone = $args[0]
 } else {
-    Write-Host "[Info] No time zone was provided."
-    exit 0
+    Write-Host "[Fail] No time zone was provided."
+    exit 2
 }
 
 # check that the time zone is valid
@@ -15,14 +14,13 @@ if ($desiredZone) {
     exit 2
 }
 
-# get the current time zone
-$currentTZ = Get-TimeZone
-
-# check if they match
-if ($currentTZ -eq $desiredZone) {
-    Write-Host "[Success] Time zones match!"
+# set it!
+try {
+    Set-TimeZone $desiredZone
+    Write-Host "[Success] Time zone has been set to $($desiredZone.Id), with an offset of $($desiredZone.BaseUtcOffset) "
     exit 0
-} else {
-    Write-Host "[Fail] Local time zone is set to $($currentTZ.Id) but $($desiredZone.Id) is expected"
+}
+catch {
+    Write-Host "[Fail] Time zone failed to update."
     exit 1
 }

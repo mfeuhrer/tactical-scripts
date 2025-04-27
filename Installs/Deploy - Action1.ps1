@@ -1,35 +1,29 @@
 # Set the name of the software found as shown in the registry. This typically matches appwiz.cpl value.
-$software = "Check MK Agent 2.2"
+$software = "Action1 Agent"
 
-# Send the uri as the first argument.
-# I use a client variable in tactical for this: {{client.omd_host}}
-$omd_host = $args[0]
-if($null -eq $omd_host) {
-    Write-Host "[Fail] No check_mk host provided."
+# Where to download installer
+$install_url = $args[0]
+if ($null -eq $install_url) {
+    Write-Host "[Fail] No install URL provided."
     exit 1
 }
-# Send the site as the second argument.
-# I use a client variable in tactical for this: {{client.omd_site}}
-$omd_site = $args[1]
-if($null -eq $omd_site) {
-    Write-Host "[Fail] No check_mk site provided."
-    exit 1
-    }
+$logname = "action1_install.log"
 
-$install_url = "https://$($omd_host)/$($omd_site)/check_mk/agents/windows/check_mk_agent.msi"
-Write-Host "[Info] Installer url is: $($install_url)"
 
-$logname = "check_mk_install.log"
+# A function to search through the registry to determine if the system believes the software is installed.
+# Return 1 if not found, return 0 if found.
 
 # Import Snippet
 {{Get-Software}}
 
 # Search the registry for the software name entered above.
 if ((Get-Software $software) -eq $false) {
-    Write-Host "[Info] $($software) is not installed, attempting to install."
+    Write-Host "[Info] $($software) is not installed, we will attempt the install now."
 
     # Validate support folders
     {{Working-Directories}}
+
+    $msiArgs = "/qn /passive /l*v $($logfile)"
 
     # Put installation process here
     Start-BitsTransfer -Source $install_url -Destination dynamic_installer.msi -Asynchronous
@@ -40,27 +34,27 @@ if ((Get-Software $software) -eq $false) {
         exit 1
     }
 
-    # Assemble install command
-    $msiArgs = "/qn /passive /l*v $($logfile)"
     $dynamicString = "/i dynamic_installer.msi $($msiArgs)"
     Start-Process msiexec.exe $dynamicString -Wait
 
     # Remove the installer.
     Remove-Item ./dynamic_installer.MSI
 
-    # Wait 10 seconds for install to complete
-    Start-Sleep -Seconds 10
-
+    # Wait 15 seconds for install to complete
+    Start-Sleep -Seconds 15
+    
     # By default, check again to see if software is now installed. 
     # If additional configuration tasks are required to confirm a successful installation, modify the check condition to suit.
     if ((Get-Software $software) -eq $false) {
-        Write-Host "[Fail] Installation was not successful."
+        # Things to do if the installation failed.
+        Write-Host "[Fail] Installation was not successful"
         exit 1
     } else {
-        Write-Host "[Success] Installation was successful."
+        # Things to do if the installation succeeded.
+        Write-Host "[Success] Installation was successful"
         exit 0
     }
 } else {
-    Write-Host "[Info] $($software) is already installed."
+    Write-Host "[Info] $($software) is already installed"
     exit 0
 }
