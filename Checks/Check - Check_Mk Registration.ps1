@@ -27,8 +27,7 @@ $cmdArgList = @(
         "--json"
         )
 
-$execStats = Measure-Command {$output = & $cmk $cmdArgList | ConvertFrom-Json}
-    Write-Host "[Info] Task performed in $($execStats) seconds."  
+$output = & $cmk $cmdArgList | ConvertFrom-Json
 
 if ($output.allow_legacy_pull -eq $true) {
     Write-Host "[Fail] Check_mk is running in legacy mode!"

@@ -26,7 +26,8 @@ if ((Get-Software $software) -eq $false) {
     $msiArgs = "/qn /passive /l*v $($logfile)"
 
     # Put installation process here
-    Start-BitsTransfer -Source $install_url -Destination dynamic_installer.msi -Asynchronous
+    # URL leads to dynamic content so BITS doesn't work here.
+    Invoke-WebRequest -Uri $install_url -OutFile dynamic_installer.msi
 
     # Check if the installer was downloaded successfully.
     if (-Not (Test-Path -Path dynamic_installer.msi)) {

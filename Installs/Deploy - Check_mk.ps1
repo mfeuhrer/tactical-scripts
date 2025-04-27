@@ -32,7 +32,7 @@ if ((Get-Software $software) -eq $false) {
     {{Working-Directories}}
 
     # Put installation process here
-    Start-BitsTransfer -Source $install_url -Destination dynamic_installer.msi -Asynchronous
+    Start-BitsTransfer -Source $install_url -Destination dynamic_installer.msi
 
     # Check if the installer was downloaded successfully.
     if (-Not (Test-Path -Path dynamic_installer.msi)) {
