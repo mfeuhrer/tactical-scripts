@@ -1,17 +1,9 @@
 # Set the name of the software found as shown in the registry. This typically matches appwiz.cpl value.
-$software = "Action1 Agent"
-
+$software = ""
 # Where to download installer
-$install_url = $args[0]
-if ($false -eq $install_url) {
-    Write-Host "[Fail] No install URL provided."
-    exit 1
-}
-$logname = "action1_install.log"
+$install_url = ""
 
-
-# A function to search through the registry to determine if the system believes the software is installed.
-# Return 1 if not found, return 0 if found.
+$logname = "app_install.log"
 
 # Import Snippet
 {{Get-Software}}

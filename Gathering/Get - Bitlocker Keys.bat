@@ -1,0 +1,1 @@
+manage-bde -protectors -get c:

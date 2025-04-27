@@ -1,17 +1,22 @@
-# Set the name of the software found as shown in the registry. This typically matches appwiz.cpl value.
-$software = "Action1 Agent"
+$software = "Wazuh Agent"
 
-# Where to download installer
-$install_url = $args[0]
-if ($false -eq $install_url) {
-    Write-Host "[Fail] No install URL provided."
+if ($false -eq $args) {
+    Write-Host "[Fail] No arguments received."
     exit 1
 }
-$logname = "action1_install.log"
+# Registration Server
+$reg_server = $args[0]
+if ($false -eq $reg_server) {
+    Write-Host "[Fail] No registration address provided."
+    exit 1
+}
+$manager = $args[1]
+if ($false -eq $manager) {
+    Write-Host "[Fail] No management address provided."
+    exit 1
+}
 
-
-# A function to search through the registry to determine if the system believes the software is installed.
-# Return 1 if not found, return 0 if found.
+$logname = "wazuh_install.log"
 
 # Import Snippet
 {{Get-Software}}
@@ -23,10 +28,10 @@ if ((Get-Software $software) -eq $false) {
     # Validate support folders
     {{Working-Directories}}
 
-    $msiArgs = "/qn /passive /l*v $($logfile)"
+    $msiArgs = "/q WAZUH_MANAGER=$($manager) WAZUH_REGISTRATION_SERVER=$($reg_server)"
 
     # Put installation process here
-    Start-BitsTransfer -Source $install_url -Destination dynamic_installer.msi -Asynchronous
+    Start-BitsTransfer -Source https://packages.wazuh.com/4.x/windows/wazuh-agent-4.0.1-1.msi -Destination dynamic_installer.msi -Asynchronous
 
     # Check if the installer was downloaded successfully.
     if (-Not (Test-Path -Path dynamic_installer.msi)) {

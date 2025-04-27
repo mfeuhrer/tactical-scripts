@@ -4,14 +4,14 @@ $software = "Check MK Agent 2.2"
 # Send the uri as the first argument.
 # I use a client variable in tactical for this: {{client.omd_host}}
 $omd_host = $args[0]
-if($null -eq $omd_host) {
+if($false -eq $omd_host) {
     Write-Host "[Fail] No check_mk host provided."
     exit 1
 }
 # Send the site as the second argument.
 # I use a client variable in tactical for this: {{client.omd_site}}
 $omd_site = $args[1]
-if($null -eq $omd_site) {
+if($false -eq $omd_site) {
     Write-Host "[Fail] No check_mk site provided."
     exit 1
     }
