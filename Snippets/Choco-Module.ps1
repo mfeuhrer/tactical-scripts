@@ -94,6 +94,7 @@ function Get-ChocoPackage {
         }
         if ($searchPackages.count -lt 1) {
                 Write-Host "[Info] $($searchName) is not managed by chocolatey on this system."
+                return $false
             } else {
                 return $searchPackages
             }
