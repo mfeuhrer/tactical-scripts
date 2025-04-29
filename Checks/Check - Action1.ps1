@@ -5,7 +5,7 @@ $software = "Action1 Agent"
 # I use {{client.enable_action1}}
 $enable_action1 = $args[0]
 if($false -eq $enable_action1) {
-    Write-Host "[Info] Check_MK is not configured for this environment."
+    Write-Host "[Info] Action1 is not configured for this environment."
     $host.SetShouldExit(3)
     exit
 }

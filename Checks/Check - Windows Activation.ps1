@@ -24,11 +24,12 @@ if ($WinVerAct -like "*will expire*") {
     Write-Host "[Warn] Windows expires on $($expiry.date)"
     $diff = $expiry.date - (Get-Date).Date
     if ($diff.TotalDays -lt 30) {
-        Write-Host "[Warn] License will expire in less than 30 days."
-        $host.SetShouldExit(2)
+        Write-Host "[Info] License will expire in less than 30 days."
+        $host.SetShouldExit(3)
         exit
     } elseif ($diff.TotalDays -lt 10) {
-        Write-Host "[Fail] License will expire in less than 10 days! Renew Now!"
+        Write-Host "[Warn] License will expire in less than 10 days! Renew Now!"
+        $host.SetShouldExit(2)
         exit 1
     }
     Write-Host "[Success] License is activated."

@@ -81,7 +81,7 @@ function Get-ChocoPackage {
         }
     }
     if ($searchName) {
-        Write-Host "[Info] Searching for: $($searchName)"
+        # Write-Host "[Info] Searching for: $($searchName)"
         $searchPackages = @()
         $chocoPackages | ForEach-Object {
             if ($_.chocoName.contains($searchName)) {
@@ -93,7 +93,7 @@ function Get-ChocoPackage {
             
         }
         if ($searchPackages.count -lt 1) {
-                Write-Host "[Info] $($searchName) is not managed by chocolatey on this system."
+                # Write-Host "[Info] $($searchName) is not managed by chocolatey on this system."
                 return $false
             } else {
                 return $searchPackages
