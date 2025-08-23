@@ -32,6 +32,7 @@ function Get-ChocoPackage {
             # These are lines choco will print that we don't care about.
             if ($line.Length -eq 0) {$skip = $true}
             if ($line.Contains("Chocolatey")) {$skip = $true}
+            if ($line.Contains("Output")) {$skip = $true}
             if ($line.Contains("Outdated")) {$skip = $true}
             if ($line.Contains("package")) {$skip = $true}
             if ($line.Contains("Did you know")) {$skip = $true}
@@ -64,6 +65,7 @@ function Get-ChocoPackage {
         # These are lines choco will print that we don't care about.
         if ($line.Length -eq 0) {$skip = $true}
         if ($line.Contains("Chocolatey")) {$skip = $true}
+        if ($line.Contains("Output")) {$skip = $true}
         if ($line.Contains("Outdated")) {$skip = $true}
         if ($line.Contains("package")) {$skip = $true}
         if ($line.Contains("Did you know")) {$skip = $true}
