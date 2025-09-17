@@ -1,5 +1,5 @@
 # Set the name of the software found as shown in the registry. This typically matches appwiz.cpl value.
-$software = "Check MK Agent 2.4"
+$software = "Checkmk Agent 2.4"
 
 # Send a $true if software is expected to be installed, $false if not.
 # I use {{client.enable_omd}}

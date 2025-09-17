@@ -1,5 +1,5 @@
 # Define Software Name
-$software = "Check MK Agent 2.4"
+$software = "Checkmk Agent 2.4"
 
 # Send a $true if software is expected to be installed, $false if not.
 # I use {{client.enable_omd}}
