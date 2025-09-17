@@ -1,5 +1,5 @@
 # Software to configure
-$software = "Check MK Agent 2.2"
+$software = "Check MK Agent 2.4"
 
 # Required variables for script execution
 
