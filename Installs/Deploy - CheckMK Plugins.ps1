@@ -28,8 +28,6 @@ if($false -eq $omd_site) {
 $base_url = "https://$($omd_host)/$($omd_site)/check_mk/agents/windows/plugins/"
 Write-Host "[Info] Base url is: $($base_url)"
 
-$logname = "check_mk_install.log"
-
 # Import Snippet
 {{Get-Software}}
 
