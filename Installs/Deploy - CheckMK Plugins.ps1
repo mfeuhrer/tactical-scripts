@@ -40,7 +40,7 @@ if ((Get-Software $software) -eq $true) {
     # Validate support folders
     {{Working-Directories}}
 
-    $plugins = @("win_license.bat", "windows_tasks.ps1", "windows_updates.vbs")
+    $plugins = @("win_license.bat", "windows_updates.vbs")
     $errors = @()
 
     ForEach ($plugin in $plugins) {
