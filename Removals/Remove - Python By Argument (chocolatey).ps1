@@ -1,5 +1,12 @@
-# packageName should be the choco name of the sofware.
-$packageName = "python311"
+# This script accepts one argument, a python package name as it exists in chocolatey.
+# For example, python 3.11 would be installed as python311
+
+$packageName = $args[0]
+if($false -eq $packageName) {
+    Write-Host "[Info] Check_MK is not configured for this environment."
+    $host.SetShouldExit(3)
+    exit 0
+}
 
 {{Choco-Module}}
 

@@ -1,7 +1,7 @@
 # Time to have fun. Let's check both the system drive and chocolatey to see if there are traces of older Python installed.
 
 # Define the old versions with an array. 
-$oldVersions = ("python2*","python309","python310","python311")
+$oldVersions = ("python2*","python309","python310","python311","python312","python313")
 
 {{Choco-Module}}
 
@@ -16,7 +16,7 @@ if (!$skip) {
     }
     if ($legacyPackages) {
         Write-Host "[Warn] The following EoL versions of python were found in chocolatey:"
-        return $legacyPackages
+        $legacyPackages.chocoName
         $host.SetShouldExit(2)
         exit
     } else {

@@ -13,7 +13,7 @@ if ((Get-ChocoPackage $packageName) -eq $false) {
     exit 0
 } else {
     Write-Host "[Info] $($packageName) is installed, attempting removal."
-    & $chocoExePath uninstall --package-parameters=/SSHServerFeature $packageName -y
+    & $chocoExePath uninstall $packageName -y
     if ((Get-ChocoPackage $packageName)) {
         Write-Host "[Fail] $($packageName) still found in chocolatey. Removal unsuccessful."
         exit 1

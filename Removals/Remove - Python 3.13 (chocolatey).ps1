@@ -1,5 +1,5 @@
 # packageName should be the choco name of the sofware.
-$packageName = "python311"
+$packageName = "python313"
 
 {{Choco-Module}}
 
