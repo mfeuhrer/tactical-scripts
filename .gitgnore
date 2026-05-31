@@ -44,3 +44,6 @@ desktop.ini
 
 # Ignore build files
 build/
+
+# Ignore obsidian config files
+.obsidian/
