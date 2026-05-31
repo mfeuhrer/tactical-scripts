@@ -27,9 +27,6 @@ $cmdArgList = @(
         "--json"
         )
 
-## $execStats = Measure-Command {$output = & $cmk $cmdArgList | ConvertFrom-Json}
-    ## Write-Host "[Info] Task performed in $($execStats) seconds."  
-
 $output = & $cmk $cmdArgList | ConvertFrom-Json
 
 if ($output.allow_legacy_pull -eq $true) {
@@ -46,5 +43,6 @@ if ($output.allow_legacy_pull -eq $true) {
         exit 0
     }
     Write-Host "[Warn] Check_mk is registered, but is not connected to $($omd_host)"
-    exit 2
+    $host.SetShouldExit(2)
+    exit
 }
