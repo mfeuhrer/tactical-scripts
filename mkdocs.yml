@@ -1,0 +1,112 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+site_name: Tactical RMM Documentation
+site_description: Scripts, automation, and runbooks for Tactical RMM
+site_author: Mason Feuhrer
+repo_url: https://git.masonfeuhrer.com/pub/tacticalrmm-scripts
+repo_name: GitLab
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    logo: material/monitor-dashboard
+    repo: fontawesome/brands/github
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+
+markdown_extensions:
+  # Converts ASCII punctuation (quotes, dashes, ellipses) to typographic HTML entities
+  - smarty: {}
+  # Fixes list parsing to behave predictably across blank lines and mixed nesting
+  - sane_lists: {}
+  # Adds styled callout blocks: note, warning, tip, danger, etc.
+  - admonition: {}
+  # Makes admonitions collapsible with a <details> toggle
+  - pymdownx.details: {}
+  # Allows fenced code blocks inside other block elements; enables Mermaid diagram rendering
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  # Syntax highlighting for fenced code blocks with optional line numbers and anchors
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  # Syntax highlighting for inline code spans (e.g. `var` in prose)
+  - pymdownx.inlinehilite: {}
+  # Lets you embed external file content into a page with --8<-- includes
+  - pymdownx.snippets: {}
+  # Content tabs for grouping related content under selectable tab headers
+  - pymdownx.tabbed:
+      alternate_style: true
+  # Renders task list checkboxes as styled interactive-looking elements
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  # Enables :emoji: shortcode syntax and renders them as SVG icons
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  # Adds HTML attributes and CSS classes to elements via { .class #id } syntax
+  - attr_list: {}
+  # Allows Markdown syntax inside raw HTML blocks
+  - md_in_html: {}
+  # Standard Markdown pipe table support
+  - tables: {}
+  # Adds footnote references and a footnotes section at the bottom of the page
+  - footnotes: {}
+  # Generates a table of contents with anchor links on each heading
+  - toc:
+      permalink: true
+
+plugins:
+  - search:
+      lang: en
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/mfeuhrer
+    - icon: fontawesome/brands/gitlab
+      link: https://git.masonfeuhrer.com/explore/
+  generator: false
+
+nav:
+  - Home: index.md
+  - About:
+    - 'Script Methodology': 'about/script-methodology.md'
+    - 'Why PowerShell?': 'about/why-powershell.md'
+    - 'Who, Me?': 'about/about-me.md'
+    - 'AI Disclosure': 'about/ai-disclosure.md'
