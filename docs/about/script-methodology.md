@@ -27,6 +27,8 @@ The check_mk information is all retrieved through arguments provided by the RMM 
 {{lcient.omd_site}} {{client.omd_host}} {{client.omd_user}} {{client.omd_token}}
 ```
 
+The script then reads those arguments and determines if the check needs to proceed.
+
 ```powershell
 # Required variables for script execution
 
