@@ -10,7 +10,7 @@ This repository and documentation contains scripts I've written on my own time a
 
 ## Where to Start
 
-If you're familiar with RMM in general, or Tactically specifically, jump right in to the code. Most scripts should have enough documentation inside of them to replicate usage in your own environment with little modification.
+If you're familiar with RMM in general, or Tactical specifically, jump right in to the code. Most scripts should have enough documentation inside of them to replicate usage in your own environment with little modification.
 
 If you're new to all of this, check some of the below resources. These should help explain my approach to architecture, my scripting methodology, and how some of these items work with each other.
 
