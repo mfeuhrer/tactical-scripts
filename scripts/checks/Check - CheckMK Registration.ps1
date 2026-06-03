@@ -1,14 +1,21 @@
+param(
+    # Send $true or $false to -enable_omd. This allows you to disable check_mk installation for specific clients if needed.
+    # I use a client level custom field called enable_omd for this: {{client.enable_omd}}
+    [bool]$enable_omd,
+    # Send the host fqdn to -omd_host. No https:// or trailing slash.
+    # I use a client variable in tactical for this: {{client.omd_host}}
+    [string]$omd_host
+)
+# The full argument chain would look like this:
+# -enable_omd {{client.enable_omd}} -omd_host {{client.omd_host}}
+
 # Admin defined variables
-# Send a $true if software is expected to be installed, $false if not.
-# I use {{client.enable_omd}}
-$enable_omd = $args[0]
 if($false -eq $enable_omd) {
     Write-Host "[Info] Check_MK is not configured for this environment."
+    $host.SetShouldExit(3)
     exit 0
 }
-# Send the uri as the second argument, do not include http(s)://
-# I use a client variable in tactical for this: {{client.omd_host}}
-$omd_host = $args[1]
+
 if($null -eq $omd_host) {
     Write-Host "[Fail] No check_mk host provided."
     exit 1

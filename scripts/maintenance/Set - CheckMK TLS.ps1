@@ -1,25 +1,47 @@
-# Software to configure
-$software = "Checkmk Agent 2.4"
+param(
+    # Send username to -omd_user. Needs permission to register endpoints
+    # I use a client level custom field called omd_agent_version for this: {{client.omd_user}}
+    [string]$omd_user,
+    # Send user token to -omd_token. This is the token generated for the user in check_mk.
+    # I use a client level custom field called omd_agent_version for this: {{client.omd_token}}
+    [string]$omd_token,
+    # Send $true or $false to -enable_omd. This allows you to disable check_mk installation for specific clients if needed.
+    # I use a client level custom field called enable_omd for this: {{client.enable_omd}}
+    [bool]$enable_omd,
+    # Send the host fqdn to -omd_host. No https:// or trailing slash.
+    # I use a client variable in tactical for this: {{client.omd_host}}
+    [string]$omd_host,
+    # Send the site name in omd to -omd_site. No trailing slash.
+    # I use a client variable in tactical for this: {{client.omd_site}}
+    [string]$omd_site
+)
+# The full argument chain would look like this:
+# -enable_omd {{client.enable_omd}} -omd_host {{client.omd_host}} -omd_site {{client.omd_site}} -omd_user {{client.omd_user}} -omd_token {{client.omd_token}}
 
-# Required variables for script execution
-
+# Set the name of the software found as shown in the registry. This typically matches appwiz.cpl value.
+if($omd_agent_version) {
+    $software = "Checkmk Agent $($omd_agent_version)"
+} else {
+    $software = "Checkmk Agent 2.5"
+}
 # Admin defined
-$omd_site = $args[0]
+if($false -eq $enable_omd) {
+    Write-Host "[Info] Check_MK is not configured for this environment."
+    $host.SetShouldExit(3)
+    exit 0
+}
 if($false -eq $omd_site) {
     Write-Host "[Fail] No check_mk site provided."
     exit 1
     }
-$omd_host = $args[1]
 if($false -eq $omd_host) {
     Write-Host "[Fail] No check_mk host provided."
     exit 1
 }
-$omd_user = $args[2]
 if($false -eq $omd_user) {
     Write-Host "[Fail] No check_mk user provided."
     exit 1
 }
-$omd_token = $args[3]
 if($false -eq $omd_token) {
     Write-Host "[Fail] No check_mk user token provided."
     exit 1
@@ -60,7 +82,7 @@ if ($check -eq 1) {
     Write-Host "[Fail] $($software) is not installed."
     exit 1
 } else {
-    Write-Host "[Info] $($software) is already installed, register with server."
+    Write-Host "[Info] $($software) is installed, register with server."
     Set-Registration
     
     # Check registration status

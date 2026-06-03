@@ -110,3 +110,7 @@ nav:
     - 'Why PowerShell?': 'about/why-powershell.md'
     - 'Who, Me?': 'about/about-me.md'
     - 'AI Disclosure': 'about/ai-disclosure.md'
+  - Structure:
+    - 'Custom Fields': 'structure/custom-fields.md'
+  - Procedures:
+    - 'Check_MK Agent': 'procedure/checkmk-agent.md'
